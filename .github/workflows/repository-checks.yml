@@ -21,7 +21,20 @@ jobs:
           test -s SECURITY.md
           test -s assets/branding/tokens.json
           python3 -m json.tool assets/branding/tokens.json >/dev/null
-          if git ls-files | grep -E '(^|/)(\.env$|\.env\.[^/]+$|.*\.sqlite3?$|.*\.jks$|.*\.pem$|.*\.safetensors$)'; then
-            echo "Potential sensitive file checked in"; exit 1
-          fi
+
+          # A committed .env.example is an intentional public-safe template.
+          # Real environment files, databases, keys, and model weights are blocked.
+          while IFS= read -r file; do
+            filename="${file##*/}"
+            case "$filename" in
+              .env.example)
+                continue
+                ;;
+              .env|.env.*|*.db|*.sqlite|*.sqlite3|*.jks|*.pem|*.safetensors)
+                echo "Potential sensitive file checked in: $file"
+                exit 1
+                ;;
+            esac
+          done < <(git ls-files)
+
           echo "Hygiene validation complete (not a production security audit)."
