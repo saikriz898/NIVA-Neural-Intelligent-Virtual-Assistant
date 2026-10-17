@@ -1,0 +1,52 @@
+# Credentials, user data and private financial information
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.jks
+*.keystore
+*service-account*.json
+*firebase-adminsdk*.json
+*.db
+*.sqlite
+*.sqlite3
+*.db-wal
+*.db-shm
+*.backup
+*.bak
+*.enc
+private/
+secrets/
+user-data/
+datasets/private/
+ml/raaz/datasets/private/
+ml/raaz/checkpoints/
+ml/raaz/runs/
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+# Flutter / Android / iOS
+.dart_tool/
+.flutter-plugins*
+.packages
+build/
+coverage/
+android/local.properties
+*.iml
+Pods/
+DerivedData/
+# JS / Python
+node_modules/
+.next/
+dist/
+__pycache__/
+.venv/
+.pytest_cache/
+*.pyc
+# misc
+.DS_Store
+.idea/
+.vscode/*.log

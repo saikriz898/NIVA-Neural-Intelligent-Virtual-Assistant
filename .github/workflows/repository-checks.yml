@@ -1,0 +1,27 @@
+name: Repository Checks
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  hygiene:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check repository hygiene
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s README.md
+          test -s SECURITY.md
+          test -s assets/branding/tokens.json
+          python3 -m json.tool assets/branding/tokens.json >/dev/null
+          if git ls-files | grep -E '(^|/)(\.env$|\.env\.[^/]+$|.*\.sqlite3?$|.*\.jks$|.*\.pem$|.*\.safetensors$)'; then
+            echo "Potential sensitive file checked in"; exit 1
+          fi
+          echo "Hygiene validation complete (not a production security audit)."
