@@ -1,0 +1,15 @@
+{
+  "brand": "NIVA",
+  "version": "1.0",
+  "status": "Selected for production design usage",
+  "colors": {
+    "midnight": "#081729",
+    "deep_navy": "#082D6B",
+    "electric_cyan": "#00AFFF",
+    "teal": "#00D6A3",
+    "platinum": "#C6CDD8",
+    "porcelain": "#F7F8FA",
+    "white": "#FFFFFF",
+    "ink": "#192438"
+  }
+}
